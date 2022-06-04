@@ -12,7 +12,7 @@
 rand_word:
     push    {lr}
     
-    bl      rand                 @ int rand_num = rand();
+    bl      rand                 @ uint32_t rand_num = rand();
     ldr     r1, =word_list_len   @ rand_num %= word_list_len;
     bl      mod                  @ rand_num *= 6;
     mov     r1, #6

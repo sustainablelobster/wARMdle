@@ -4,14 +4,14 @@
 .global mod
 .type mod, %function
 
-@ unsigned int mod(unsigned int dividend, unsigned int divisor)
+@ uint32_t mod(uint32_t dividend, uint32_t divisor)
 @   Returns the remainder of dividend / divisor.
 mod:
-.loop:
-    cmp r0, r1      @ unsigned int remainder = dividend;
-    blo .return     @ while (remainder >= divsor)
-    sub r0, r1      @   remainder -= divisor;
-    b   .loop
+    cmp r0, r1          @ uint32_t remainder = dividend;
+    blo 0f              @ while (remainder >= divsor)
+    sub r0, r1          @   remainder -= divisor;
+    b   mod
 
-.return:
-    bx  lr          @ return remainder
+@ local return
+0:
+    bx  lr              @ return remainder

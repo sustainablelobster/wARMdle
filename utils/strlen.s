@@ -11,11 +11,12 @@ strlen:
     eor     r1, r1          @ size_t len = 0;
     eor     r2, r2
 
-.loop:
+@ local loop
+0:
     ldrb    r2, [r0, r1]    @ while (str[len] != 0)
     cmp     r2, #0          @   len++;
     addne   r1, #1
-    bne     .loop
+    bne     0b
     mov     r0, r1
 
     bx      lr              @ return len;

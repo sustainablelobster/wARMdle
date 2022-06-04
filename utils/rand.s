@@ -15,17 +15,17 @@ rand:
     eor     r1, r1          @ int fd = open("/dev/urandom", O_RDONLY);
     mov     r7, #0x05       @ if (fd == -1) {
     svc     #0              @   rand_num = -1;
-    cmp     r0, #-1         @   goto .rand_return;
-    beq     .rand_return    @ }
+    cmp     r0, #-1         @   goto .return;
+    beq     .return         @ }
     mov     r3, r0
 
     mov     r1, sp          @ char buf[4];
     mov     r2, #4          @ ssize_t bytes_read = read(fd, buf, 4);
     mov     r7, #0x03       @ if (bytes_read != 4) {
     svc     #0              @   rand_num = -1;
-    cmp     r0, #4          @   goto .rand_return;
+    cmp     r0, #4          @   goto .return;
     movne   r0, #-1         @ }
-    bne     .rand_return
+    bne     .return
 
     mov     r0, r3          @ close(fd);
     mov     r7, #0x06
@@ -35,7 +35,7 @@ rand:
     cmp     r0, #-1         @ if (rand_num == -1) 
     subeq   r0, #1          @   rand_num--;
 
-.rand_return:
+.return:
     add     sp, #4          @ return rand_num;
     pop     {r7, r11}
     bx      lr

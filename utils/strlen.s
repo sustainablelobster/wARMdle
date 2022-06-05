@@ -4,11 +4,11 @@
 .global strlen
 .type strlen, %function
 
-@ size_t strlen(const char *str)
+@ uint32_t strlen(const char *str)
 @   Calculates the length of str.
 @   Returns the number of bytes in the str, excluding the null terminator.
 strlen:
-    eor     r1, r1          @ size_t len = 0;
+    eor     r1, r1          @ uint32_t len = 0;
     eor     r2, r2
 
 @ local loop

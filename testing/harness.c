@@ -9,6 +9,7 @@ extern int32_t rand();
 extern uint32_t strlen(const char *);
 extern const char *rand_word();
 extern int32_t input(char *, uint32_t);
+extern void to_upper(char *);
 
 int main() {
     printf("mod(31, 7): %d\n", mod(31, 7));
@@ -22,5 +23,9 @@ int main() {
     print("Enter five-letter word: ");
     input(buf, 5);
     printf("Got: %s\n", buf);
+
+    // to_upper() test
+    to_upper(buf);
+    printf("to_upper(buf): %s\n", buf);
     return 0;
 }

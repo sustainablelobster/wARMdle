@@ -1,8 +1,6 @@
 .syntax unified
 .section .text
-
 .extern flush_stdin
-
 .global input
 .type input, %function
 

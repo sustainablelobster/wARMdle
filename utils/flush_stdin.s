@@ -1,6 +1,5 @@
 .syntax unified
 .section .text
-
 .global flush_stdin
 .type flush_stdin, %function
 

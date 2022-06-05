@@ -1,8 +1,6 @@
 .syntax unified
 .section .text
-
 .extern strlen
-
 .global print
 .type print, %function
 

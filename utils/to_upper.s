@@ -1,6 +1,5 @@
 .syntax unified
 .section .text
-
 .global to_upper
 .type to_upper, %function
 

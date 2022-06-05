@@ -1,9 +1,7 @@
 .syntax unified
 .section .text
-
 .extern rand
 .extern mod
-
 .global rand_word
 .type rand_word, %function
 

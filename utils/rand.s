@@ -1,6 +1,5 @@
 .syntax unified
 .section .text
-
 .global rand
 .type rand, %function
 

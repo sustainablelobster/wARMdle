@@ -1,8 +1,6 @@
 .syntax unified
 .section .text
-
 .extern print
-
 .global clear_screen
 .type clear_screen, %function
 

@@ -19,7 +19,7 @@ input:
     mov     r7, #0x03
     svc     #0
     cmp     r0, #-1
-    beq     0f
+    beq     .Linp_return
 
     eor     r1, r1          @ buf[bytes_read] = 0;
     strb    r1, [r4, r0]
@@ -28,6 +28,5 @@ input:
     bl      flush_stdin
     mov     r0, r4
 
-@ return
-0:
+.Linp_return:
     pop     {r4, r7, pc}    @ return bytes_read;

@@ -15,7 +15,7 @@ rand:
     mov     r7, #0x05       @ if (fd == -1) {
     svc     #0              @   rand_num = -1;
     cmp     r0, #-1         @   goto 0f;
-    beq     0f              @ }
+    beq     .Lrand_return   @ }
     mov     r3, r0
 
     mov     r1, sp          @ char buf[4];
@@ -24,7 +24,7 @@ rand:
     svc     #0              @   rand_num = -1;
     cmp     r0, #4          @   goto 0f;
     movne   r0, #-1         @ }
-    bne     0f
+    bne     .Lrand_return
 
     mov     r0, r3          @ close(fd);
     mov     r7, #0x06
@@ -34,13 +34,12 @@ rand:
     cmp     r0, #-1         @ if (rand_num == -1) 
     subeq   r0, #1          @   rand_num--;
 
-@ local return
-0:
+.Lrand_return:
     add     sp, #4          @ return rand_num;
     pop     {r7, r11}
     bx      lr
 
 
-.section .data
+.section .rodata
 urandom:
     .asciz "/dev/urandom"

@@ -15,19 +15,19 @@ guess_valid:
     ldr     r7, =guess_list_len
 
 @ loop
-0:
+.Lgv_loop:
     cmp     r6, r7              @ int32_t is_valid = 0;
     eoreq   r0, r0              @ int32_t i = 0;
-    beq     1f                  @ while (i < guess_list_len) { 
+    beq     .Lgv_return         @ while (i < guess_list_len) { 
     mov     r0, r4              @   if (strcmp(guess, guess_list[i])) {
     mov     r1, r5              @       is_valid = 1;
     bl      strcmp              @       break;
     cmp     r0, #1              @   }
-    beq     1f                  @   i++;
+    beq     .Lgv_return         @   i++;
     add     r5, #6              @ }
     add     r6, #1
-    b       0b
+    b       .Lgv_loop
 
 @ return
-1:
+.Lgv_return:
     pop     {r4 - r7, pc}       @ return is_valid;

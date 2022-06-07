@@ -19,24 +19,22 @@ strcmp:
 
     cmp     r0, r6              @ int32_t equal = 1;
     eorne   r0, r0              @ if (s1_len != s2_len) {
-    bne     1f                  @   equal = 0;
-    mov     r0, #1              @   goto 1f; // return
+    bne     .Lscmp_return       @   equal = 0;
+    mov     r0, #1              @   goto .Lscmp_return; // return
     eor     r1, r1              @ }
     eor     r2, r2
 
-@ loop
-0:
+.Lscmp_loop:
     ldrb    r1, [r4]            @ while (*s1 != 0) {
     cmp     r1, #0              @   if (*s1 != *s2) {
-    beq     1f                  @       equal = 0;
+    beq     .Lscmp_return       @       equal = 0;
     ldrb    r2, [r5]            @       break;
     cmp     r1, r2              @   }
     eorne   r0, r0              @
-    bne     1f                  @   s1++;
+    bne     .Lscmp_return       @   s1++;
     add     r4, #1              @   s2++;
     add     r5, #1              @ }
-    b       0b
+    b       .Lscmp_loop
 
-@ return
-1:
+.Lscmp_return:
     pop     {r4 - r6, pc}       @ return equal;

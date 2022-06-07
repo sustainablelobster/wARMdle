@@ -7,10 +7,9 @@
 @   Returns the remainder of dividend / divisor.
 mod:
     cmp r0, r1          @ uint32_t remainder = dividend;
-    blo 0f              @ while (remainder >= divsor)
+    blo .Lmod_return    @ while (remainder >= divsor)
     sub r0, r1          @   remainder -= divisor;
     b   mod
 
-@ local return
-0:
+.Lmod_return:
     bx  lr              @ return remainder

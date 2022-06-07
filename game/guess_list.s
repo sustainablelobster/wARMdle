@@ -1,5 +1,5 @@
 .syntax unified
-.section .data
+.section .rodata
 
 guess_list:
     .asciz "WOMEN"

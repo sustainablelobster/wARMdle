@@ -1,5 +1,5 @@
 .syntax unified
-.section .data
+.section .rodata
 
 word_list:
     .asciz "ABACK"

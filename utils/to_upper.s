@@ -8,12 +8,11 @@
 to_upper:
     ldrb    r1, [r0]    @ while (*str != 0) {
     cmp     r1, #0      @   *str &= 0xdf;
-    beq     0f          @   str++;
+    beq     .Ltu_return @   str++;
     and     r1, 0xdf    @ }
     strb    r1, [r0]
     add     r0, #1
     b       to_upper
 
-@ return
-0:
+.Ltu_return:
     bx      lr          @ return;

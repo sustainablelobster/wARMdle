@@ -27,7 +27,7 @@ int main() {
             if (last_guess_invalid) {
                 print("\n\"");
                 print(guesses[i]);
-                print("\" is not in word list.");
+                print("\" not in word list");
             } 
 
             print("\n> ");

@@ -19,20 +19,25 @@ int main() {
     
 
     for (int i = 0; i < 6; i++) {
+        int32_t last_guess_invalid = 0;
 
         while (1) {
             draw_screen(i, guesses, answer);
+
+            if (last_guess_invalid) {
+                print("\n\"");
+                print(guesses[i]);
+                print("\" is not in word list.");
+            } 
 
             print("\n> ");
             input(guesses[i], 5);
             to_upper(guesses[i]);
 
-            if (!guess_valid(guesses[i])) {
-                print("\"");
-                print(guesses[i]);
-                print("\" not in word list.\n");
-            } else {
+            if (guess_valid(guesses[i])) {
                 break;
+            } else {
+                last_guess_invalid = 1;
             }
         }
     }

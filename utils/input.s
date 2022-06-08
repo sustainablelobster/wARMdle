@@ -1,6 +1,7 @@
 .syntax unified
 .section .text
 .extern flush_stdin
+.extern trim_newline
 .global input
 .type input, %function
 
@@ -19,14 +20,17 @@ input:
     mov     r7, #0x03
     svc     #0
     cmp     r0, #-1
-    beq     .Linp_return
+    beq     .LINP_return
 
     eor     r1, r1          @ buf[bytes_read] = 0;
     strb    r1, [r4, r0]
+
+    mov     r0, r4          @ trim_newline(buf);
+    bl      trim_newline
     
     mov     r4, r0          @ flush_stdin();
     bl      flush_stdin
     mov     r0, r4
 
-.Linp_return:
+.LINP_return:
     pop     {r4, r7, pc}    @ return bytes_read;

@@ -22,14 +22,14 @@ flush_stdin:
     mov     r7, #0x37
     svc     #0
 
-.Lfs_loop:
+.LFS_loop:
     eor     r0, r0          @ while(read(STDIN_FILENO, buf, 4) == 4)
     mov     r1, sp          @   // loop
     mov     r2, #4
     mov     r7, #0x03
     svc     #0
     cmp     r0, #4
-    beq     .Lfs_loop
+    beq     .LFS_loop
 
     eor     r0, r0          @ fcntl(STDIN_FILENO, F_SETFL, og_flags);
     mov     r1, #4

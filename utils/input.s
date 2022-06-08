@@ -16,7 +16,7 @@ input:
 
     mov     r2, r1          @ int32_t bytes_read = read(STDIN_FILENO, buf, count);
     mov     r1, r0          @ if (bytes_read == -1)
-    eor     r0, r0          @   goto 0f; // return
+    eor     r0, r0          @   goto .LINP_return;
     mov     r7, #0x03
     svc     #0
     cmp     r0, #-1

@@ -3,3 +3,4 @@
 *.o
 harness
 .gdb_history
+warmdle

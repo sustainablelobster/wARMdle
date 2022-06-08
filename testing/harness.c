@@ -10,8 +10,8 @@ extern void to_upper(char *);
 extern void clear_screen();
 extern int32_t guess_valid(char *);
 extern int32_t strcmp(const char *, const char *);
-
 extern void draw_screen(int turn, char guesses[6][6], const char *answer);
+extern void get_guess(char *buf);
 
 int main() {
     const char *answer = rand_word(); 
@@ -35,9 +35,7 @@ int main() {
                 print("\" not in word list");
             } 
 
-            print("\n> ");
-            input(guesses[i], 5);
-            to_upper(guesses[i]);
+            get_guess(guesses[i]);
 
             if (guess_valid(guesses[i])) {
                 break;

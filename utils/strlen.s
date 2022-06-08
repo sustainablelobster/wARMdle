@@ -10,11 +10,11 @@ strlen:
     eor     r1, r1          @ uint32_t len = 0;
     eor     r2, r2
 
-.Lslen_loop:
+.LSLEN_loop:
     ldrb    r2, [r0, r1]    @ while (str[len] != 0)
     cmp     r2, #0          @   len++;
     addne   r1, #1
-    bne     .Lslen_loop
+    bne     .LSLEN_loop
     mov     r0, r1
 
     bx      lr              @ return len;

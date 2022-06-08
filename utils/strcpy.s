@@ -9,10 +9,10 @@ strcpy:
     ldrb    r2, [r0]        @ do {
     strb    r2, [r1]        @   *dst = *src
     cmp     r2, #0          @   if (*src == 0) 
-    beq     .Lscpy_return   @       break;
+    beq     .LSCPY_return   @       break;
     add     r0, #1          @   src++;
     add     r1, #1          @   dst++;
     b       strcpy          @ } while (1);
 
-.Lscpy_return:
+.LSCPY_return:
     bx      lr

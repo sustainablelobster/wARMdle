@@ -8,7 +8,7 @@
 to_upper:
     ldrb    r1, [r0]        @ while (*str != 0) {
     cmp     r1, #0          @   if (*str >= 'a' && *str <= 'z') {
-    beq     .Ltu_return     @       *str &= 0xdf;
+    beq     .LTU_return     @       *str &= 0xdf;
     cmp     r1, #'a'        @   }
     blt     .LTU_next_iter  @   str++;
     cmp     r1, #'z'        @ }
@@ -20,5 +20,5 @@ to_upper:
     add     r0, #1
     b       to_upper
 
-.Ltu_return:
-    bx      lr          @ return;
+.LTU_return:
+    bx      lr              @ return;

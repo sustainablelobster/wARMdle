@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include <stdio.h> 
+
 extern int32_t print();
 extern void print_title();
 extern void print_empty_row();
@@ -9,16 +9,21 @@ extern int32_t input(char *, uint32_t);
 extern void to_upper(char *);
 extern void clear_screen();
 extern int32_t guess_valid(char *);
+extern int32_t strcmp(const char *, const char *);
 
 extern void draw_screen(int turn, char guesses[6][6], const char *answer);
 
 int main() {
     const char *answer = rand_word(); 
     char guesses[6][6];
+    int32_t player_won = 0;
 
-    
+    int i = 0;
+    for (; i < 6; i++) {
+        if (player_won) {
+            break;
+        }
 
-    for (int i = 0; i < 6; i++) {
         int32_t last_guess_invalid = 0;
 
         while (1) {
@@ -40,6 +45,19 @@ int main() {
                 last_guess_invalid = 1;
             }
         }
+
+        if (strcmp(guesses[i], answer)) {
+            player_won = 1;
+        }
+    }
+
+    draw_screen(i, guesses, answer);
+    if (player_won) {
+        print("\nGOOOOOOOOOOOAL!\n");
+    } else {
+        print("\nThe word was: ");
+        print(answer);
+        print("\n");
     }
 
     return 0;

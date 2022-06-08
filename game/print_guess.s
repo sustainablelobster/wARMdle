@@ -35,24 +35,23 @@ print_guess:
     eor     r7, r7
 
 .Lpg_print_loop:
-    ldrb    r0, [r5, r7]        @ for (int32_t i = 0; i < 5; i++) {
-    cmp     r0, #'='            @   const char *color;
-    ldreq   r0, =.Lpg_correct   @   char *strchr_ret = strchr(answer_cpy, guess[i]);
-    beq     .Lpg_print          @   if (answer_cpy[i] == '=') {
-                                @       color = 6f; // green (correct);
-    mov     r0, r5              @   } else if (strchr_ret) {
-    ldrb    r1, [r4, r7]        @       color = 7f; // red (almost correct)
-    bl      strchr              @       *strchr_ret = '~'; 
-    mov     r1, r0              @   } else {
-    cmp     r0, #0              @       color = 8f; // gray (incorrect)
-    ldreq   r0, =.Lpg_incorrect @   }
-    beq     .Lpg_print          @   print(color);
-                                @   letter_box[i] = guess[i];
-    mov     r0, #'~'            @   print(letter_box);
-    strb    r0, [r1]            @ }
+    ldrb    r0, [r5, r7]            @ for (int32_t i = 0; i < 5; i++) {
+    cmp     r0, #'='                @   const char *color;
+    ldreq   r0, =.Lpg_correct       @   char *strchr_ret = strchr(answer_cpy, guess[i]);
+    beq     .Lpg_print              @   if (answer_cpy[i] == '=') {
+                                    @       color = 6f; // green (correct);
+    mov     r0, r5                  @   } else if (strchr_ret) {
+    ldrb    r1, [r4, r7]            @       color = 7f; // red (almost correct)
+    bl      strchr                  @       *strchr_ret = '~'; 
+    mov     r1, r0                  @   } else {
+    cmp     r0, #0                  @       color = 8f; // gray (incorrect)
+    ldreq   r0, =.Lpg_incorrect     @   }
+    beq     .Lpg_print              @   print(color);
+                                    @   letter_box[i] = guess[i];
+    mov     r0, #'~'                @   print(letter_box);
+    strb    r0, [r1]                @ }
     ldr     r0, =.Lpg_misplace
 
-@ print and prep next loop iteration
 .Lpg_print:
     bl      print
     ldrb    r0, [r4, r7]
@@ -64,7 +63,7 @@ print_guess:
     cmp     r7, #5
     blt     .Lpg_print_loop
 
-    ldr     r0, =.Lpg_default
+    ldr     r0, =.Lpg_newline
     bl      print
 
     pop     {r4 - r7, pc}
@@ -80,12 +79,6 @@ print_guess:
 
 
 .section .rodata
-.Lpg_default:
-    .byte   0x1b
-    .ascii  "[39m"
-    .byte   0x1b
-    .asciz  "[49m"
-
 .Lpg_correct:
     .byte   0x1b
     .ascii  "[97m"
@@ -103,3 +96,9 @@ print_guess:
     .ascii  "[97m"
     .byte   0x1b
     .asciz  "[100m"
+
+.Lpg_newline:
+    .byte   0x1b
+    .ascii  "[39m"
+    .byte   0x1b
+    .asciz  "[49m\n"

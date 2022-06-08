@@ -58,8 +58,8 @@ main:
     mov     r6, r0
     add     r5, r6
 
-    mov     r0, r9
-    mov     r1, r4
+    mov     r0, r8
+    mov     r1, r9
     bl      strcmp
     mov     r7, r0
 
@@ -67,7 +67,7 @@ main:
 
 .LMAIN_end:
     mov     r0, r7          @ draw_screen(turn, guesses, answer);
-    mov     r1, r4          @ print_end_msg(player_won, answer);
+    mov     r1, r8          @ print_end_msg(player_won, answer);
     bl      print_end_msg
 
     pop     {r4 - r9, pc}

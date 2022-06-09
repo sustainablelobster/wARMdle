@@ -7,6 +7,7 @@
 .global rand_word
 .type rand_word, %function
 
+.arm
 @ const char *rand_word()
 @   Returns a random word from the word list
 rand_word:
@@ -14,7 +15,8 @@ rand_word:
     
     bl      rand                 @ uint32_t rand_num = rand();
     ldr     r1, =word_list_len   @ rand_num %= word_list_len;
-    bl      mod                  @ rand_num *= 6;
+    ldr     r1, [r1]             @ rand_num *= 6;
+    bl      mod
     mov     r1, #6
     mul     r1, r0, r1
 

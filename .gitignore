@@ -4,3 +4,9 @@
 harness
 .gdb_history
 warmdle
+autom4te.cache/
+aclocal.m4
+config.log
+config.status
+build-aux
+Makefile

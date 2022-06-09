@@ -1,5 +1,7 @@
 .syntax unified
 .section .rodata
+.global word_list
+.global word_list_len
 
 word_list:
     .asciz "ABACK"
@@ -2311,4 +2313,6 @@ word_list:
     .asciz "ZEBRA"
     .asciz "ZESTY"
     .asciz "ZONAL"
-    .equ   word_list_len, (. - word_list) / 6
+
+word_list_len:
+    .word  (. - word_list) / 6

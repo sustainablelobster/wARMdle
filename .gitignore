@@ -1,6 +1,13 @@
+autom4te.cache/
+autoscan.log
+config.log
+config.status
+configure.scan
+.dirstamp
+.gdb_history
+harness
+Makefile
+*.o
 .tmp/
 .vscode/
-*.o
-harness
-.gdb_history
 warmdle

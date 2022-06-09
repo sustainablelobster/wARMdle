@@ -1,5 +1,7 @@
 .syntax unified
 .section .rodata
+.global guess_list
+.global guess_list_len
 
 guess_list:
     .asciz "WOMEN"
@@ -12949,4 +12951,6 @@ guess_list:
     .asciz "GRITS"
     .asciz "KAMES"
     .asciz "DEATH"
-    .equ   guess_list_len, (. - guess_list) / 6
+
+guess_list_len:
+    .word  (. - guess_list) / 6

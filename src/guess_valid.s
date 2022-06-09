@@ -13,6 +13,7 @@ guess_valid:
     ldr     r5, =guess_list
     eor     r6, r6
     ldr     r7, =guess_list_len
+    ldr     r7, [r7]
 
 @ loop
 .Lgv_loop:

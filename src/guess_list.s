@@ -1,8 +1,8 @@
-.syntax unified
-.section .rodata
-.global guess_list
-.global guess_list_len
+.syntax    unified
+.global    guess_list
+.global    guess_list_len
 
+.section   .rodata
 guess_list:
     .asciz "WOMEN"
     .asciz "NIKAU"

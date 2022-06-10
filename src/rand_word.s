@@ -1,13 +1,12 @@
-.syntax unified
-.section .text
-.extern rand
-.extern mod
-.extern word_list
-.extern word_list_len
-.global rand_word
-.type rand_word, %function
+.syntax     unified
+.extern     rand
+.extern     mod
+.extern     word_list
+.extern     word_list_len
+.global     rand_word
+.type       rand_word, %function
 
-.arm
+.section    .text
 @ const char *rand_word()
 @   Returns a random word from the word list
 rand_word:

@@ -1,10 +1,14 @@
-.syntax unified
-.section .text
-.global flush_stdin
-.type flush_stdin, %function
+.syntax     unified
+.global     flush_stdin
+.type       flush_stdin, %function
 
+.section    .text
 @ void flush_stdin()
 @   Clear STDIN buffer.
+@
+@   Register usage:
+@       r4 - int32_t og_flags - original STDIN flags
+@       sp - char buf[4] - temporary buffer for reading STDIN
 flush_stdin:
     push    {r4, r7, r11}   @ char buf[4];
     mov     r11, sp
@@ -22,14 +26,14 @@ flush_stdin:
     mov     r7, #0x37
     svc     #0
 
-.LFS_loop:
+read_loop:
     eor     r0, r0          @ while(read(STDIN_FILENO, buf, 4) == 4)
     mov     r1, sp          @   // loop
     mov     r2, #4
     mov     r7, #0x03
     svc     #0
     cmp     r0, #4
-    beq     .LFS_loop
+    beq     read_loop
 
     eor     r0, r0          @ fcntl(STDIN_FILENO, F_SETFL, og_flags);
     mov     r1, #4

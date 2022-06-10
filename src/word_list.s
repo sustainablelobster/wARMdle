@@ -1,8 +1,8 @@
-.syntax unified
-.section .rodata
-.global word_list
-.global word_list_len
+.syntax    unified
+.global    word_list
+.global    word_list_len
 
+.section   .rodata
 word_list:
     .asciz "ABACK"
     .asciz "ABASE"

@@ -36,6 +36,7 @@ default_color_newline:
     .byte   0x1b
     .asciz  "[49m\n"
 
+
 .section    .text
 @ void print_guess(const char *guess, const char *answer)
 @   Prints guess to screen with appropriate highlighting.
